@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Menu {
-    private String title;
-    private String prompt;
-    private String[] options;
+    private final String title;
+    private final String prompt;
+    private final String[] options;
 
     public Menu(String title, String prompt, String[] options){
         this.title = title;
@@ -19,7 +19,7 @@ public class Menu {
         this.clearScreen();
         System.out.println(title + "\n");
         for(int i = 0; i < options.length; i++){
-            System.out.println(options[i] + ".");
+            System.out.println(options[i]);
         }
         System.out.print("\n" + prompt + ": ");
         char choice = scan.next().charAt(0);
@@ -29,6 +29,11 @@ public class Menu {
 
     public String[] getOptions(){
         return options;
+    }
+
+    public void moveCursor(int row, int column){
+        char escCode = 0x1B;
+        System.out.print(String.format("%c[%d;%df", escCode, row, column));
     }
 
     public void clearScreen() {
